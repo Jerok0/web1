@@ -1,0 +1,9 @@
+GEM
+  specs:
+    sequel (4.5.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  sequel
