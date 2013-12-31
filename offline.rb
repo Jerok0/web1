@@ -2,7 +2,8 @@ require "sequel"
 require "sinatra"
 class Ticketer
   def initialize
-    @DB = Sequel.sqlite("mydb.db")
+    #@DB = Sequel.sqlite("mydb.db")
+    @DB = Sequel.connect("postgres://ticketer:yash@localhost/tickets")
     @tickets = @DB[:tickets]
   end
 
@@ -84,4 +85,10 @@ get "/delete/:id" do
     session[:flasht] = :bad
     redirect "/"
   end
+end
+
+get "/viewall" do
+  a = Ticketer.new
+  @events = a.diy {|m| m.map([:event, :ntickets, :pricept, :id])}
+  erb :viewall
 end
